@@ -1,7 +1,5 @@
 from flask import Flask, jsonify, request
-import mysql.connector
 import requests
-import threading
 import config
 apiKey=config.api_key
 app=Flask(__name__)
@@ -35,7 +33,7 @@ def league(summonerId):
 @app.route('/matchData/<string:matchId>', methods=['GET'])
 def getMatchData(matchId):
 	#need to upgrade this to match with the timing in the app
-	threading.Timer(1.0, getMatchData).start()
+	#threading.Timer(1.0, getMatchData).start()
 	matchData=requests.get("https://na1.api.riotgames.com/lol/match/v3/matches/"+matchId+"?api_key="+apiKey)
 	json=matchData.json()
 	return jsonify(json) 
