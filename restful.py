@@ -40,10 +40,10 @@ def getMatchData(matchId):
 	json=matchData.json()
 	return jsonify(json) 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
 	return ("Brian's API")
 
 
 if __name__ =='__main__':
-	app.run(debug=True, port=8080)
+	app.run()
