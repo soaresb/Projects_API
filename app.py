@@ -1,6 +1,11 @@
 from flask import Flask, jsonify, request
 import requests
 import config
+import sys
+import pymongo
+import json
+from bson.json_util import dumps
+from bson import json_util
 apiKey=config.api_key
 app=Flask(__name__)
 
@@ -42,6 +47,15 @@ def getMatchData(matchId):
 def index():
 	return ("Brian's API")
 
+uri = "mongodb://bsoares:gomanny24@ds141474.mlab.com:41474/meanappdb_soares"
+client = pymongo.MongoClient(uri)
+db = client.get_default_database()
+players = db['players']
+play=[]
+@app.route('/ffb')
+def index():
+	documents = [doc for doc in players.find(sort=[("value",-1)]).limit(60)]
+	return json_util.dumps({'cursor': documents})
 
 if __name__ =='__main__':
 	app.run()
