@@ -6,9 +6,10 @@ import pymongo
 import json
 from bson.json_util import dumps
 from bson import json_util
+from flask_cors import CORS
 apiKey=config.api_key
 app=Flask(__name__)
-
+CORS(app)
 # cnx = mysql.connector.connect(user='bsoares', password='GOmanny1436',
 #                               host='rds-mysql-fanfootball.cwmwr07yxatm.us-east-1.rds.amazonaws.com',
 #                               database='FanFootball')
