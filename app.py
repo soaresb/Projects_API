@@ -52,7 +52,7 @@ client = pymongo.MongoClient(uri)
 db = client.get_default_database()
 players = db['players']
 @app.route('/ffb', methods=['GET'])
-def index():
+def getFFBuzz():
 	documents = [doc for doc in players.find(sort=[("value",-1)]).limit(60)]
 	return json_util.dumps({'cursor': documents})
 
