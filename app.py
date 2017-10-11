@@ -51,7 +51,7 @@ uri = "mongodb://bsoares:gomanny24@ds141474.mlab.com:41474/meanappdb_soares"
 client = pymongo.MongoClient(uri)
 db = client.get_default_database()
 players = db['players']
-@app.route('/ffb', methods='GET')
+@app.route('/ffb', methods=['GET'])
 def index():
 	documents = [doc for doc in players.find(sort=[("value",-1)]).limit(60)]
 	return json_util.dumps({'cursor': documents})
