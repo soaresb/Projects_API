@@ -42,7 +42,7 @@ def getMatchData(matchId):
 def index():
 	return ("Brian's API")
 
-uri = "mongodb://bsoares:gomanny24@ds141474.mlab.com:41474/meanappdb_soares"
+uri = config.uri
 client = pymongo.MongoClient(uri)
 db = client.get_default_database()
 players = db['players']
