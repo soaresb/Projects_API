@@ -10,12 +10,6 @@ from flask_cors import CORS
 apiKey=config.api_key
 app=Flask(__name__)
 CORS(app)
-# cnx = mysql.connector.connect(user='bsoares', password='GOmanny1436',
-#                               host='rds-mysql-fanfootball.cwmwr07yxatm.us-east-1.rds.amazonaws.com',
-#                               database='FanFootball')
-# cursor = cnx.cursor()
-# query = ("SELECT * FROM RBTable")
-         
 
 
 @app.route('/summoner/<string:name>', methods=['GET'])
@@ -52,10 +46,34 @@ uri = "mongodb://bsoares:gomanny24@ds141474.mlab.com:41474/meanappdb_soares"
 client = pymongo.MongoClient(uri)
 db = client.get_default_database()
 players = db['players']
-@app.route('/ffb', methods=['GET'])
-def getFFBuzz():
+@app.route('/ffb/all', methods=['GET'])
+def getFFBuzzAll():
 	documents = [doc for doc in players.find(sort=[("value",-1)]).limit(60)]
 	return json_util.dumps({'cursor': documents})
+
+@app.route('/ffb/RBs', methods=['GET'])
+def getFFBuzzRBs():
+	documents = [doc for doc in players.find({"pos":'RB'},sort=[("value",-1)]).limit(25)]
+	return json_util.dumps({'cursor': documents})
+
+
+@app.route('/ffb/WRs', methods=['GET'])
+def getFFBuzzWRs():
+	documents = [doc for doc in players.find({"pos":'WR'},sort=[("value",-1)]).limit(25)]
+	return json_util.dumps({'cursor': documents})
+
+@app.route('/ffb/QBs', methods=['GET'])
+def getFFBuzzQBs():
+	documents = [doc for doc in players.find({"pos":'QB'},sort=[("value",-1)]).limit(10)]
+	return json_util.dumps({'cursor': documents})
+
+@app.route('/ffb/TEs', methods=['GET'])
+def getFFBuzzTEs():
+	documents = [doc for doc in players.find({"pos":'TE'},sort=[("value",-1)]).limit(10)]
+	return json_util.dumps({'cursor': documents})
+
+
+
 
 if __name__ =='__main__':
 	app.run()
