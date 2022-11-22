@@ -38,7 +38,7 @@ nbformat==4.3.0
 nflgame==1.2.20
 numpy==1.12.1
 olefile==0.44
-Pillow==4.2.1
+Pillow==9.3.0
 plotly==2.0.8
 ply==3.8
 protobuf==3.4.0
